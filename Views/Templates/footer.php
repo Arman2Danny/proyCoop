@@ -33,6 +33,7 @@
         <script src="<?php echo base_url; ?>Assets/js/asistencia.js"></script>
         <script src="<?php echo base_url; ?>Assets/js/multa.js"></script>
         <script src="<?php echo base_url; ?>Assets/js/eventos.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/ticket.js"></script>
         <script src="<?php echo base_url; ?>Assets/js/sweetalert2.all.min.js"></script>
     </body>
 </html>
