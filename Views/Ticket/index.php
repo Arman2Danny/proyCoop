@@ -18,7 +18,7 @@ include_once("Views/Templates/header.php");
         <th>Fecha</th>
     </tr>
 </thead>
-<tbody>
+<tbody class="tbody">
     
 </tbody>
 </table>

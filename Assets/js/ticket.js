@@ -1,3 +1,21 @@
+
+document.addEventListener('DOMContentLoaded',function(){
+  $.ajax({
+    url: 'Ticket/listar',
+    type: 'get',
+    success: function(data, status){
+      console.log(data);
+       
+      
+
+    }
+  })
+ 
+})
+
+
+
+
 function frmTicket(){
 
     document.getElementById("title").innerHTML="Registrar Ticket";
