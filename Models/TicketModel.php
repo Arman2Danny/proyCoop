@@ -77,6 +77,12 @@
     return $res;
 
 }
+public function ticketEditar($id){
+  $sql = "SELECT * FROM ticket WHERE idnombresocio = $id";
+  $data = $this->select($sql);
+  return $data;
+
+ }
 
     
   }
