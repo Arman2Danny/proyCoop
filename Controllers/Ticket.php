@@ -8,6 +8,7 @@ class Ticket extends Controller{
         if(empty($_SESSION['activo'])){
             header("location: ".base_url);
         }
+        $data['listar'] = $this->model->getListarTicket();
         $data['ticket']=$this->model->getTicket();
         $this->views->getView($this, "index", $data);
     }
@@ -23,13 +24,10 @@ class Ticket extends Controller{
         echo $sum;
     }
 
-    public function listar(){
-        $array[]="";
-        $array=$data = $this->model->getListarTicket();
-      
-      $conver = json_encode($array);
-      echo $conver;
-        
+    public function displayTicket(){
+        if(isset($_POST['displaySend'])){
+            echo "si existe";
+        }
     }
 
     public function registrar(){

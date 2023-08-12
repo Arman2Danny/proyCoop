@@ -5,23 +5,7 @@ include_once("Views/Templates/header.php");
 <li class="breadcrumb-item active"><h2>Cobro de Tickets</h2></li>
 </ol>
 <button class="btn btn-info mb-3" type="button" onclick="frmTicket();"><i class="fa fa-plus" aria-hidden="true"> Agregar</i></button>
-<table class="table table-light table-hover" style="width: 100%" id="tblTicket" >
-
-<thead>
-    <tr>
-        <th>Id</th>
-        <th>Codigo_Factura</th>
-        <th>Nombre_Socio</th>
-        <th>Apellido_Socio</th>
-        <th>Valor</th>
-        <th>Descripcion</th>
-        <th>Fecha</th>
-    </tr>
-</thead>
-<tbody class="tbody">
-    
-</tbody>
-</table>
+<div id="displayDataTable" class="mt-2"></div>
 <!--formulario registrar Ticket-->
 <div id="nuevo_ticket" class="modal fade mt-5" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog " role="document">

@@ -1,6 +1,7 @@
 
 document.addEventListener('DOMContentLoaded',function(){
-  $.ajax({
+  displayData();
+  /*$.ajax({
     url: 'Ticket/listar',
     type: 'get',
     success: function(data, status){
@@ -9,10 +10,26 @@ document.addEventListener('DOMContentLoaded',function(){
       
 
     }
-  })
+  })*/
  
 })
 
+
+function displayData(){
+  var displayData = "true";
+  $.ajax({
+      url: "Ticket/displayTicket",
+      type:"post",
+      data:{
+          displaySend: displayData
+      },
+      success: function(data,status){
+          $('#displayDataTable').html(data);
+         
+      }
+  })
+
+}
 
 
 
@@ -39,7 +56,7 @@ function frmTicket(){
 
 
 
-//registrar vehiculo
+//registrar ticket
 function registrarTicket(e){
     e.preventDefault();
     const ticket = document.getElementById("ticket");
@@ -112,5 +129,38 @@ function registrarTicket(e){
 
     }
 }
+
+function btnEditarTicket(id){
+ 
+  document.getElementById("title").innerHTML="Actualizar Vehiculo";
+  document.getElementById("btnAccion").innerHTML='<i class="fa fa-refresh" aria-hidden="true"></i> Actualizar';
+  document.getElementById("btnAccion").classList.replace("btn-primary","btn-success");
+  //document.getElementById('oculto').classList.replace("d-none","d-block");
+ // document.getElementById('estado').setAttribute("type","text");
+  console.log(id);
+  const url = base_url + "Vehiculos/editar/"+id; 
+  const http= new  XMLHttpRequest();
+  http.open("GET", url, true );
+  http.send();
+  http.onreadystatechange = function(){
+      if(this.readyState==4 && this.status==200){
+       console.log(this.responseText);
+    const res =JSON.parse(this.responseText);
+      document.getElementById("idvehiculo").value = res.idvehiculo;
+       document.getElementById("unidad").value = res.num_unidad;
+          document.getElementById("placa").value = res.placa;
+       document.getElementById("chasis").value = res.num_chasis;
+       document.getElementById("marca").value = res.marca;
+       document.getElementById("fecha").value = res.fecha_fabricacion;
+       document.getElementById("habilitacion").value= res.num_habilitacion;
+       document.getElementById("idsocio").value= res.id_socio;         
+       $("#nuevo_vehiculo").modal("show");
+        
+  }
+ 
+}
+
+}
+
     
 }
