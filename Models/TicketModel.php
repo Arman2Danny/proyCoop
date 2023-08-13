@@ -27,6 +27,13 @@
     return $data;
   }
 
+  public function listarReporte($id){
+    $this->id = $id;
+    $sql="SELECT * FROM socios, ticket WHERE idnombresocio= '$this->id' AND idsocio = '$this->id'";
+    $data = $this->selectAll($sql);
+    return $data;
+  }
+
   public function registrarTicket($ticket , $nombre, $apellido,  $valor, $detalle, $fecha){
     $this->ticket = $ticket;
     $this->nombre = $nombre;

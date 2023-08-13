@@ -65,7 +65,7 @@ class Ticket extends Controller{
 
                 <td><button class= "btn btn-info" onclick="editarTicket('.$id.')"  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
                 
-                <td> <a class= "btn btn-success" target="_black" href="Views/reportes/reporte1.php?id='.$id.'"><i class="fa fa-file" ></i></a></td>
+                <td> <button class= "btn btn-success" data-bs-toggle="modal" onclick="reporteTicket('.$id.')" > <i class="fa fa-file" ></i></button></td>
                 </tr>';
             }
             echo $table;
@@ -124,6 +124,76 @@ class Ticket extends Controller{
     die();
 
 }
+
+public function generarPdf($id){
+
+
+
+        
+   require('Libraries/fpdf/fpdf.php');
+
+
+    date_default_timezone_set('America/Guayaquil');
+       
+        $data = $this->model->listarReporte($id);
+        print_r($data);
+        
+       foreach($data as $row){
+        $cod = $data[0]['codigoticket'];
+        $nombre = $data[0]['nombresocio'];
+        $apellido= $data[0]['apellidosocio'];
+        $valor = $data[0]['valor'];
+        $detalle = $data[0]['detalle'];
+        $fecha = $data[0]['fechaticket'];
+
+
+       }
+       $hoy = date("F j, Y, g:i a");
+       define('dolar',chr(36));
+
+      
+      
+       
+       $pdf = new FPDF('P','mm',array(100,90));
+       $pdf->AddPage();
+       $pdf->SetTitle("Reporte Ticket");
+$pdf->Ln(5);
+// CABECERA
+$pdf->SetTextColor(59,131,189);
+$pdf->SetFont('Helvetica','B',8);
+
+$pdf->Cell(75,4,'"Coop. Taxi Cardenal de la Torre No:134 "',0,1,'C');
+$pdf->Cell(60,4, $pdf->Image(base_url.'/Assets/img/taxi.jpg', $pdf->GetX(), $pdf->GetY(),20),0,1,'R');
+$pdf->SetTextColor(254,0,0);
+$pdf->SetFont('Times','',8);
+$pdf->Cell(115,4,'No:'.'0000'.$cod ,0,1,'C');
+$pdf->SetTextColor(59,131,189);
+$pdf->SetFont('Helvetica','',8);
+ 
+// DATOS FACTURA        
+$pdf->Ln(5);
+$pdf->Cell(15,4,'Recibe: ' ,0,0,'');
+$pdf->Cell(40,4,$nombre .'  '.utf8_decode($apellido) ,0,0,'');
+$pdf->Cell(60,4,'Por: '. $valor .' '. dolar ,0,1,'');
+$pdf->Cell(18,4,'La suma de : ' ,0,0,'');
+$pdf->Cell(38,4,'_______________________________' ,0,1,'');
+$pdf->Cell(15,4,'__________________________________________' ,0,1,'');
+$pdf->Cell(30,4,'Detalle del concepto',0,0,'');
+$pdf->Cell(40,4, $detalle ,0,1,'');
+$pdf->Cell(15,4,'__________________________________________' ,0,1,'');
+$pdf->Cell(20,4,'Quito, a ',0,0,'');
+$pdf->Cell(40,4,$fecha,0,1,'');
+
+
+
+ob_end_clean(); 
+
+
+$pdf->Output(); 
+ 
+
+}
+
 }
 
 

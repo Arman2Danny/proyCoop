@@ -161,4 +161,22 @@ function editarTicket(id){
 
 }
 
+function reporteTicket(id){
+console.log(id);
+
+const url = base_url + "Ticket/generarPdf/"+id; 
+const http= new  XMLHttpRequest();
+http.open("GET", url, true );
+http.send();
+http.onreadystatechange = function(){
+    if(this.readyState==4 && this.status==200){
+      window.open(url)
+     console.log(this.responseText);
+ // const res =JSON.parse(this.responseText);
+ 
+    }
+  }
+}
+
+
     
