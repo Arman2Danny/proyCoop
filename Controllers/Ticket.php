@@ -65,7 +65,7 @@ class Ticket extends Controller{
 
                 <td><button class= "btn btn-info" onclick="editarTicket('.$id.')"  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
                 
-                <td> <a class= "btn btn-success" target="_black" href="Assets/reportes/reporte1.php?id='.$id.'"><i class="fa fa-file" ></i></a></td>
+                <td> <a class= "btn btn-success" target="_black" href="Views/reportes/reporte1.php?id='.$id.'"><i class="fa fa-file" ></i></a></td>
                 </tr>';
             }
             echo $table;
