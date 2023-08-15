@@ -6,10 +6,10 @@ require_once "Views/Templates/header.php"
 </ol>
 
 
-<button class="btn btn-info mb-3" type="button" onclick="addAsistencia();"><i class="fas fa-save"></i> Grabar </button>
+<button class="btn btn-info mb-3" type="button" onclick="registrarAsistencia(event);"><i class="fas fa-save"></i> Grabar </button>
 
 <!--inicio de formulario de asistencia-->
-<form  class="border p-2 rounded-3 bg-light">
+<form  class="border p-2 rounded-3 bg-light" id="frmAsistencia">
  
   <div class="row mb-4">
         <div class="row">

@@ -57,7 +57,8 @@
     public function displayAsistencia(){
         if(isset($_POST['displaySend']) AND isset($_POST['resultSend'])){
             $fechaHoy = $_POST['resultSend'];
-            $table = '
+            echo $fechaHoy;
+           /* $table = '
             <div class="container">
             <div class="row">
             <div class="col-lg-12">
@@ -73,11 +74,21 @@
                           
                             </tr>
                         </thead>
-            ';
-            
-
-            echo $table;
+            ';*/
+            $data = $this->model->getAsistenciaLista($fechaHoy);
+print_r($data);
+           // echo $table;
         }
+    }
+
+    public function insertarAsistencia(){
+        $idnombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $estado = $_POST['estado'];
+        $fecha = $_POST['fecha_asist'];
+        $multa = $_POST['multa'];
+        $evento = $_POST['evento'];
+      
     }
 
  }

@@ -30,7 +30,7 @@ class Ticket extends Controller{
             <div class="container">
 <div class="row">
 <div class="col-lg-12">
-        <table class="table mt-5 display nowrap bg-light " cellspacing="0" id="mitabla" width="100%" >
+        <table class="table display nowrap bg-light " cellspacing="0" id="mitabla" width="100%" >
             <thead class="table-light table-striped">
                 <tr>
                 <th class="text-warning">NumeroTicket</th>
@@ -70,6 +70,7 @@ class Ticket extends Controller{
                 </tr>';
             }
             echo $table;
+  
         }
     }
 

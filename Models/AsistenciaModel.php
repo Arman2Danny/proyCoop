@@ -29,5 +29,32 @@
         $data = $this->select($sql);
         return $data;
     }
+
+    public function registrarAsistencia($fecha , $idnombre, $apellido,  $estado, $multa,$evento){
+        $this->fecha = $fecha;
+        $this->idnombre = $nombre;
+        $this->apellido = $apellido;
+        $this->estado = $estado;
+        $this->multa = $multa;
+        $this->evento = $evento;
+       
+        //$this->idsocio = $idsocio;
+       
+        $verificar =  "SELECT * FROM asistenciasocio WHERE idasistiencia= '$this->idnombre' AND fecha_asist = '$this->fecha' ";
+        $existe = $this->select($verificar);
+        if(empty($existe)){
+          $sql ="INSERT INTO ticket(idasistencia, apellidosocio, estado, fecha_asist,monto_multa, evento) VALUES(?,?,?,?,?,?)";
+          $datos = array($this->nombre, $this->apellido, $this->estado,$this->fecha,$this->multa,$this->multa);
+          $data=$this->save($sql, $datos);
+          if($data == 1){
+            $res= "ok";
+          }else{
+            $res= "error";
+          }
+        }else{
+          $res = "existe";
+        }
+          return $res;
+      }
  }
 ?>
