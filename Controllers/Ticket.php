@@ -41,6 +41,7 @@ class Ticket extends Controller{
                  <th class="text-warning">Fecha</th>
                  <th></th>
                  <th></th>
+                 <th></th>
               
                 </tr>
             </thead>
@@ -62,7 +63,7 @@ class Ticket extends Controller{
                 <td>'. $detalle .'</td>
                 <td>'. $valor .'</td>
                 <td>'. $fecha .'</td>
-
+                 <td><span class="badge bg-success">Pagado</span></td>
                 <td><button class= "btn btn-info" onclick="editarTicket('.$id.')"  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
                 
                 <td> <button class= "btn btn-success" data-bs-toggle="modal" onclick="reporteTicket('.$id.')" > <i class="fa fa-file" ></i></button></td>

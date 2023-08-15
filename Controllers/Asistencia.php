@@ -54,6 +54,32 @@
         }
     }
 
+    public function displayAsistencia(){
+        if(isset($_POST['displaySend']) AND isset($_POST['resultSend'])){
+            $fechaHoy = $_POST['resultSend'];
+            $table = '
+            <div class="container">
+            <div class="row">
+            <div class="col-lg-12">
+                    <table class="table mt-5 display nowrap" cellspacing="0" id="mitabla" width="100%" >
+                        <thead class="table-secondary table-striped">
+                            <tr>
+                            <th>Fecha</th>
+                            <th>Nombre_Socios</th>
+                            <th>Apellido_Socios</th>
+                             <th>Estado</th>
+                             <th>Multa</th>
+                             <th></th>
+                          
+                            </tr>
+                        </thead>
+            ';
+            
+
+            echo $table;
+        }
+    }
+
  }
 
 ?>

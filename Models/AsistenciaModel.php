@@ -22,5 +22,12 @@
         $data= $this->selectAll($sql);
         return $data;
     }
+
+    public function getAsistenciaLista($fechaHoy){
+        $this->fechaHoy = $fechaHoy;
+        $sql = "SELECT * from socios, evento , asistenciasocio WHERE idsocio = idasistencia AND idevento = id_evento AND fecha_asist = '$this->fechaHoy'";
+        $data = $this->select($sql);
+        return $data;
+    }
  }
 ?>
