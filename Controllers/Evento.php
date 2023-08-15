@@ -24,13 +24,9 @@ class Evento extends Controller{
 
     public function listar(){
         $data = $this->model->getEventos();
-         $id= $data['idevento'];
-         $id= $data['idevento'];
-         $id= $data['idevento'];
-         $id= $data['idevento'];
-        echo json_encode($id);
        
        
+       echo json_encode($data);
 
         
 
