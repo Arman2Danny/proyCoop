@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded',function(){
         },
         {
             'data': 'ordendia'
+        },
+        {
+            'data': 'acciones'
         }
 
         ]
@@ -204,17 +207,19 @@ function btnEliminarEvento(id){
 
 }
 
-function btnReporteEvento(id){
-   // console.log(id);
-  const url = base_url + "Evento/dato";
-  console.log(url);
-  const http= new  XMLHttpRequest();
-            http.open("GET", url, true );
-            http.send();
-            http.onreadystatechange = function(){
-                if(this.readyState==4 && this.status==200){
-                 console.log(this.responseText);
-
-                }
-}
-}
+function reporteEvento(id){
+    console.log(id);
+    
+    const url = base_url + "Evento/generarPdf/"+id; 
+    const http= new  XMLHttpRequest();
+    http.open("GET", url, true );
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState==4 && this.status==200){
+          window.open(url)
+         console.log(this.responseText);
+     // const res =JSON.parse(this.responseText);
+     
+        }
+      }
+    }

@@ -15,6 +15,7 @@ include_once "Views/Templates/header.php";
             <th class="text-warning">Fecha</th>
             <th class="text-warning">Hora</th>
             <th class="text-warning">Orden_Dia</th>
+            <th></th>
           
         
            

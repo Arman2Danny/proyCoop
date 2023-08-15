@@ -129,8 +129,6 @@ class Ticket extends Controller{
 
 public function generarPdf($id){
 
-
-
         
    require('Libraries/fpdf/fpdf.php');
 
