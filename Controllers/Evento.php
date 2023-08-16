@@ -134,28 +134,22 @@ public function generarPdf($id){
   require('Libraries/fpdf/fpdf.php');
   $pdf = new FPDF();
   $pdf->AddPage();
-  
-  // config document
-  $pdf->SetTitle('Generar archivos PDF con PHP');
-  $pdf->SetAuthor('Kodetop');
-  $pdf->SetCreator('FPDF Maker');
-  
-  // add title
-  $pdf->SetFont('Arial', 'B', 24);
-  $pdf->Cell(0, 10, 'Generar archivos PDF con PHP', 0, 1);
-  $pdf->Ln();
-  
-  // add text
-  $pdf->SetFont('Arial', '', 12);
-  $pdf->MultiCell(0, 7, utf8_decode('Los archivos PDF se utilizan ampliamente en documentos y reportes que necesitan mantener el diseño y contenido (imágenes, tipos de letra, colores, etc), por ello vamos a aprender a crear archivos PDF utilizando PHP.'), 0, 1);
-  $pdf->Ln();
-  $pdf->MultiCell(0, 7, utf8_decode('FPDF es una clase PHP que permite la generación de archivos PDF de forma sencilla y sin necesidad de instalar librerías adicionales, cuenta con métodos bien documentados que facilitan su uso.'), 0, 1);
-  $pdf->Ln();
-  $pdf->MultiCell(0, 7, utf8_decode('Antes de comenzar lo primero es descargar FPDF e incluir los archivos necesarios en nuestro proyecto.'), 0, 1);
-  $pdf->Ln();
-  
   // add image
-  $pdf->Image(base_url.'/Assets/img/taxi.jpg', null, null, 180);
+  $pdf->Image(base_url.'Assets/img/taxi.jpg', 50, 15, 20, 20, 'JPG');
+  // config document
+
+  $pdf->SetFont('Helvetica','',8);
+  $pdf->Cell(210,5,'COOPERATIVA DE TRANSPORTE DE TAXIS',0,1,'C');
+
+$pdf->SetFont('Helvetica','',8);
+$pdf->Cell(211,4,'"CARDENAL DE LA TORRE"' ,0,1,'C');
+
+
+$pdf->SetFont('helvetica', '', 10);
+$pdf->Cell(210, 5, 'FUNDADA EL 18 DE JULIO 1987', 0, 1, 'C');
+$pdf->Cell(210,5, 'Este campo no se ve jajaj', 0, 1, 'C');
+$pdf->ln(1);
+$pdf->Cell(210, 5, '__________________________________________', 0, 1, 'C');
   
   // output file
   $pdf->Output('', 'fpdf-complete.pdf');
