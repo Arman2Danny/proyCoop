@@ -16,9 +16,19 @@ $('#nombre').change(function(){
 
 });
 
-document.getElementById("fecha").addEventListener('change', function(){
+/*document.getElementById("fecha").addEventListener('change', function(){
+    alert("funciona");
     displayData();
-   });
+   });*/
+
+   document.addEventListener('DOMContentLoaded',function(){
+
+  
+    displayDataAsistencia();
+   
+  console.log("si sirve");
+   
+  })
 
    function formatDate(date) {
     var d = new Date(date),
@@ -34,31 +44,21 @@ document.getElementById("fecha").addEventListener('change', function(){
     return [year, month, day].join('-');
 }
 
-function displayData(){
+function displayDataAsistencia(){
     var displayData = "true";
-    var fecha = new Date();
-    var fechaAdd = $('#fecha').val();
-    
-  var result=formatDate(fecha);
-
-
-    if(fechaAdd == result ){
-    $.ajax({
-        url: "Asistencia/displayAsistencia",
-        type:"post",
-        data:{
-            displaySend: displayData,
-            resultSend: result,
-        },
-        success: function(data,status){
-            console.log(data);
-        
-            $('#displayDataTableAsistencia').html(data);
-        }
-    });
-  }else{
-    $('#displayDataTableAsistencia').html('');
-  }
+ 
+  $.ajax({
+      url: "Asistencia/displayAsistencia",
+      type:"post",
+      data:{
+          displaySend: displayData
+      },
+      success: function(data,status){
+          $('#displayDataTableAsist').html(data);
+         
+         
+      }
+  })
 
 }
 
@@ -75,7 +75,7 @@ function registrarAsistencia(e){
     //const estado = parseInt(est);
     
     
-    if(evento.value == "" || nombre.value == "" || apellido.value== ""  || estado.value == "" || multa.value =="" || fecha == "" ){
+    if(evento.value == "" || nombre.value == "" || apellido.value== ""  || estado.value == "" || multa.value =="" || fecha.value == "" ){
         Swal.fire({
             position: 'center',
             icon: 'error',

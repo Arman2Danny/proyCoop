@@ -8,8 +8,14 @@ require_once "Views/Templates/header.php"
 
 <button class="btn btn-info mb-3" type="button" onclick="registrarAsistencia(event);"><i class="fas fa-save"></i> Grabar </button>
 
+
+
 <!--inicio de formulario de asistencia-->
-<form  class="border p-2 rounded-3 bg-light" id="frmAsistencia">
+<div class="card border-light mb-3" style="width: 100%">
+  <div class="card-header bg-transparent border-light">Datos Socio</div>
+  <div class="card-body text-success">
+
+<form  class="border p-2 rounded-3 bg-light" id="frmAsistencia" method="POST">
  
   <div class="row mb-4">
         <div class="row">
@@ -81,7 +87,16 @@ require_once "Views/Templates/header.php"
        </div>
 </div>  
   </form>
+ 
 <!--fin de formulario-->
 
-<div id="displayDataTableAsistencia" class="mt-3 bg-light p-3 "></div> 
+ 
+   
+  </div>
+  <div class="card-footer bg-transparent mb-4">
+  <div id="displayDataTableAsist" class="mb-2"></div>
+  </div>
+
+</div>
+
 <?php require_once "Views/Templates/footer.php"?>
