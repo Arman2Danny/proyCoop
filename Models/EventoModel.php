@@ -22,7 +22,10 @@ class EventoModel extends Query{
         return $data;
     }
 
-  public function obtenerId(){
+  public function reporteEvento($id){
+    $sql= "SELECT * FROM evento WHERE idevento = '$id'";
+    $data= $this->select($sql);
+    return $data;
 
   }
 

@@ -131,7 +131,15 @@ public function dato($id){
 }
 
 public function generarPdf($id){
+
   require('Libraries/fpdf/fpdf.php');
+  date_default_timezone_set('America/Guayaquil');
+$data = $this->model->reporteEvento($id);
+$ordendia=$data['ordendia'];
+
+$arr=explode("\r\n", trim($ordendia));
+
+
   $pdf = new FPDF();
   $pdf->AddPage();
   // add image
@@ -150,6 +158,42 @@ $pdf->Cell(210, 5, 'FUNDADA EL 18 DE JULIO 1987', 0, 1, 'C');
 $pdf->Cell(210,5, 'Este campo no se ve jajaj', 0, 1, 'C');
 $pdf->ln(1);
 $pdf->Cell(210, 5, '__________________________________________', 0, 1, 'C');
+$pdf->ln(4);
+$pdf->SetFont('times', 'B', 14);
+$pdf->Cell(210,5, 'CONVOCATORIA', 0,1,'C');
+
+$pdf->Cell(180,5, $data['fecha'], 0,1,'R');
+$pdf->Ln(10);
+ $pdf->SetFont('Arial', '', 12);
+ $pdf->SetTextColor(27, 27, 27);
+ $texto = utf8_decode("Se convoca a todos los señores socios de la Cooperativa Cardenal de la Torre,
+ No. " .$data['idevento']. " a la sesion de " .$data['nombre_evento'].
+ "a realizarse en la sede de la Cooperativa el dia " .$data['fecha']. " a las "
+ .$data['hora']. ", con el siguiente orden del dia:");
+ $pdf->Multicell(180,6, $texto,0,'C');
+ $pdf->Ln(5);
+ for($i=0; $i<count($arr); $i++){
+  $linea= $arr[$i];
+  $pdf->MultiCell(180,6,$linea,0,'J');
+ }
+$pdf->ln(10);
+$pdf->SetFont('times', 'B', 14);
+$pdf->Cell(180,5, 'ATENTAMENTE' , 0, 1, 'C');
+$pdf->Ln(10);
+
+
+$pdf->MultiCell(183,5,'  _______________             _____________',0,'C');
+$pdf->Ln(1);
+$pdf->SetFont('times', '', 11);
+$pdf->Cell(185,3, 'Sr. Guillermo Cauja                     Sr. Nestor Toapanta' , 0, 2, 'C');
+$pdf->Ln(30);
+$pdf->SetFont('times', '', 14);
+$pdf->MultiCell(183,35,$data['Descripcion'],0,'L');
+
+// ---------------------------------------------------------
+
+//Close and output PDF document
+ob_end_clean();
   
   // output file
   $pdf->Output('', 'fpdf-complete.pdf');
