@@ -86,7 +86,7 @@
                 $nombre = $row['nombresocio'];
                 $apellido= $row['apellidosocio'];
                 $estado = $row['estado'];
-                $fecha = $row['fecha'];
+                $fecha = $row['fecha_asist'];
                 $multa = $row['monto_multa'];
                 $evento = $row['id_evento'];
               
@@ -108,6 +108,48 @@
     }
 
     public function insertarAsistencia(){
+        $idnombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $estado = $_POST['estado'];
+        $fecha = $_POST['fecha'];
+        $multa = $_POST['multa'];
+        $evento = $_POST['evento'];
+        $id = $_POST['codigo'];
+          
+
+
+     if(empty($idnombre) || empty($apellido) || empty($estado) || empty($fecha) ||  empty($evento)){
+            $msg= "Todos los campos son obligatorios";
+      
+        }else{
+            if($id==""){
+            
+
+                $data= $this->model->registrarAsistencia($idnombre, $apellido, $estado, $fecha, $multa, $evento);
+              if($data == "ok"){
+                $msg = "si";
+              }else if($data == "existe"){
+                $msg ="asistencia ya existe";
+              }else{
+                $msg = "error al registrar la asistencia";
+              }
+            }else{
+                $data= $this->model->modificarAsistencia($idnombre,$apellido, $estado,$fecha, $multa, $evento, $id);
+                if($data == "modificado"){
+                  $msg= "modificado";
+                     }else{
+                     $msg = "error al modificar el Asistencia";
+                  }
+            }
+          
+      
+        }
+        echo $msg;
+        die();
+      
+    }
+
+    public function updateAsistencia(){
         $idnombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $estado = $_POST['estado'];
@@ -138,6 +180,31 @@
         echo $msg;
         die();
       
+    }
+
+    public function editar($id){
+     
+        $data=$this->model->AsistenciaEditar($id);
+      
+       echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        die();
+    
+    }
+
+    public function editarNombre(){
+     
+     if(isset($_POST['id_nombre'])){
+            $id_nombre = $_POST['id_nombre'];
+            $data= $this->model->consultApellido($id_nombre);
+           
+            if($data){
+                $msg = $data['apellidosocio'];
+                //$msg = "si";
+            }else{
+                $msg = "no";
+            }
+        }
+        echo $msg;
     }
 
  }

@@ -149,13 +149,14 @@ function editarTicket(id){
       if(this.readyState==4 && this.status==200){
        console.log(this.responseText);
     const res =JSON.parse(this.responseText);
-      document.getElementById("idticket").value = res.idticket;
-       document.getElementById("ticket").value = res.codigoticket;
-          document.getElementById("nombre").value = res.idnombresocio;
-       document.getElementById("apellido").value = res.apellidosocio;
-       document.getElementById("valor").value = res.valor;
-       document.getElementById("detalle").value = res.detalle;
-       document.getElementById("fecha").value= res.fechaticket;
+     
+    document.getElementById("idticket").value = res.idticket;
+    document.getElementById("ticket").value = res.codigoticket;
+       document.getElementById("nombre").value = res.idnombresocio;
+    document.getElementById("apellido").value = res.apellidosocio;
+    document.getElementById("valor").value = res.valor;
+    document.getElementById("detalle").value = res.detalle;
+    document.getElementById("fecha").value= res.fechaticket;
        //document.getElementById("idsocio").value= res.id_socio;         
        $("#nuevo_ticket").modal("show");
         

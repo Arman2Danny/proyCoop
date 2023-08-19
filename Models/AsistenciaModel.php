@@ -79,5 +79,12 @@
           return $res;
       
       }
+
+      public function AsistenciaEditar($id){
+        $sql = "SELECT * FROM asistenciasocio WHERE idasistencia = $id";
+        $data = $this->select($sql);
+        return $data;
+      
+       }
  }
 ?>

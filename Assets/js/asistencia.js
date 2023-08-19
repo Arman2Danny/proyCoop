@@ -1,6 +1,6 @@
 //creacion lista de apellidos para socio conectado con asistencia.php
 $(document).ready(function(){
-
+  
 $('#nombre').change(function(){
  $("#nombre option:selected").each(function(){
     var id_nombre=$(this).val();
@@ -40,6 +40,7 @@ function displayDataAsistencia(){
     var displayData = "true";
     var fecha = new Date();
     var fechaAdd = $('#fecha').val();
+    
     
   var result=formatDate(fecha);
  if(fechaAdd == result){
@@ -141,5 +142,61 @@ function registrarAsistencia(e){
 
 function editarAsistencia(id){
     console.log(id);
+    const url = base_url + "Asistencia/editar/"+id; 
+    const http= new  XMLHttpRequest();
+    http.open("GET", url, true );
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState==4 && this.status==200){
+         console.log(this.responseText);
+      const res =JSON.parse(this.responseText);
+      
+         //document.getElementById("idsocio").value= res.id_socio;  
+         
+         document.getElementById("editarnombre").value = res.idasistencia;
+         document.getElementById("editarapellido").value = res.apellidosocio;
+            document.getElementById("editarestado").value = res.estado;
+         document.getElementById("editarmulta").value = res.monto_multa;
+         document.getElementById("editarevento").value = res.id_evento;
+        // $("#nuevo_ticket").modal("show");
+          
+    }
+   
+  }
 }
+
+$("#editarnombre").change(function(){
+   
+  
+    $("#editarnombre option:selected").each(function(){
+      var id_nombre=$(this).val();
+      console.log(id_nombre);
+      
+      $.post("Asistencia/editarNombre",{id_nombre:id_nombre},
+      function(data){
+        console.log(data);
+       $("#editarapellido").val(data);
+      }
+      )
+  //desahabilitar opciones
+  
+  
+  
+    })
+  
+  });
+
+  $("#editarestado").change(function(){
+    $("#editarestado option:selected").each(function(){
+      var vestado= $(this).val();
+      $.post("Asistencia/multa",{vestado:vestado},
+      function(data){
+        console.log(data);
+        $("#editarmulta").val(data);
+      }
+      
+      )
+  
+    })
+  });
 

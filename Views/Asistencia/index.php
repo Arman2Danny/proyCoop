@@ -104,15 +104,90 @@ require_once "Views/Templates/header.php"
   </div>
 
 </div>
-
+//inicia modal de editar asistencia
 <div class="modal fade" id="editarModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" >
 
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content bg-light">
       <div class="modal-header">
-      <h5 class="modal-title text-white" id="exampleModalToggleLabel2">Editar Asistencias</h5>
+      <h5 class="modal-title text-black" id="exampleModalToggleLabel2">Editar Asistencias</h5>
         <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form>
+          <label>
+            <i class="fa fa-calendar"></i>
+            Nombre del Socio:
+          </label>
+          <select id="editarnombre" class="form-select" name="editarnombre" disabled>
+        <option selected disabled>Seleccionar:</option>
+        <?php foreach($data['socio'] as $row){  ?>
+                        <option value="<?php echo $row['idsocio'] ?>"><?php echo $row['nombresocio'];  ?></option>
 
+                     <?php } ?>
+
+        </select>
+        <label>
+              <i class="fa fa-user"></i>
+            Apellido_Socio
+            </label>
+            <div>
+            <input type="text" id="editarapellido" class="form-control" placeholder="Apellido" required name="editarapellido" disabled>
+            </div>
+
+            <label>
+            <i class="fa fa-star-half"></i>
+           Estado
+          </label>
+          <div>
+          <select id="editarestado" class="form-select" name="editarestado">
+        <option selected disabled>Seleccionar:</option>
+        <option value="Presente">Presente</option>
+        <option value="Falta">Falta</option>
+        <option value="Justificada">Justificada</option>
+          </select>
+      </div>
+
+          <label>
+            <i class="fa fa-credit-card-alt"></i>
+           Multa
+          </label>
+          <div>
+          
+      <input type="text" id="editarmulta" class="form-control" placeholder="multa" name="editarmulta" required>
+
+          </div>
+
+          <label>
+              <i class="fa fa-book"></i>
+            Evento:
+            </label>
+            <div>
+            <select id="editarevento" class="form-select" name="editarevento" disabled>
+        <option selected disabled>Seleccionar:</option>
+        <?php foreach($data['evento'] as $row){  ?>
+                        <option value="<?php echo $row['idevento'] ?>"><?php echo $row['nombre_evento'];  ?></option>
+
+                     <?php } ?>
+        </select>
+
+        </div>
+
+        <div>
+            <button class="btn btn-primary mt-3" type="button" id="btnEnviar" onclick="registrarAsistencia(event);">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+              Actualizar
+            </button>
+
+            <button class="btn btn-danger mt-3" data-bs-target="#staticBackdrop" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+        <input type="hidden" id="codigo">
+  
+          </div>
+
+        </form>
+
+        </div>
+        </div>
       </div>
       </div>
       </div>  
