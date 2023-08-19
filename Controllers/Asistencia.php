@@ -57,31 +57,10 @@
     public function displayAsistencia(){
 
      
-            $table='
-            <div class="container">
-<div class="row">
-<div class="col-lg-12">
-        <table class="table display nowrap bg-light " cellspacing="0" id="mitabla" width="100%" >
-            <thead class="table-light table-striped">
-                <tr>
-                <th>Fecha</th>
-                <th>Nombre_Socios</th>
-                <th>Apellido_Socios</th>
-                 <th>Estado</th>
-                 <th>Multa</th>
-                 <th></th>
-              
-                </tr>
-            </thead>
-            ';
            
-            echo $table;
   
-        
-    
-        /*   if(isset($_POST['displaySend']) AND isset($_POST['resultSend'])){
+          if(isset($_POST['displaySend']) AND isset($_POST['resultSend'])){
             $fechaHoy = $_POST['resultSend'];
-            echo $fechaHoy;
         
          $table = '
             <div class="container">
@@ -95,15 +74,37 @@
                             <th>Apellido_Socios</th>
                              <th>Estado</th>
                              <th>Multa</th>
+                             
                              <th></th>
                           
                             </tr>
                         </thead>
             ';
             $data = $this->model->getAsistenciaLista($fechaHoy);
-
-           // echo $table;
-        }*/
+            foreach($data as $row){
+                $id= $row['idasistencia'];
+                $nombre = $row['nombresocio'];
+                $apellido= $row['apellidosocio'];
+                $estado = $row['estado'];
+                $fecha = $row['fecha'];
+                $multa = $row['monto_multa'];
+                $evento = $row['id_evento'];
+              
+                $table.= '<tr>
+                <td >'.$fecha.'</td>
+                <td>'. $nombre .'</td>
+                <td>'. $apellido .'</td>
+                <td>'. $estado .'</td>
+                <td>'. $multa .'</td>
+                <td><button class= "btn btn-info" onclick="editarAsistencia('.$id.')"  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
+          
+             ';
+            }
+            echo '<script type="text/JavaScript"> 
+            $("#mitabla").DataTable();
+            </script>';
+           echo $table;
+        }
     }
 
     public function insertarAsistencia(){
@@ -113,6 +114,29 @@
         $fecha = $_POST['fecha'];
         $multa = $_POST['multa'];
         $evento = $_POST['evento'];
+          
+
+
+     if(empty($idnombre) || empty($apellido) || empty($estado) || empty($fecha) ||  empty($evento)){
+            $msg= "Todos los campos son obligatorios";
+      
+        }else{
+            if(isset($_POST['nombre']) || isset($_POST['apellido']) || isset($_POST['estado'])  || isset($_POST['fecha']) || isset($_POST['multa']) || isset($_POST['evento'])){
+
+                $data= $this->model->registrarAsistencia($idnombre, $apellido, $estado, $fecha, $multa, $evento);
+              if($data == "ok"){
+                $msg = "si";
+              }else if($data == "existe"){
+                $msg ="asistencia ya existe";
+              }else{
+                $msg = "error al registrar la asistencia";
+              }
+            }
+          
+      
+        }
+        echo $msg;
+        die();
       
     }
 

@@ -36,8 +36,8 @@ class Ticket extends Controller{
                 <th class="text-warning">NumeroTicket</th>
                 <th class="text-warning">Nombre_Socios</th>
                 <th class="text-warning">Apellido_Socios</th>
-                 <th class="text-warning">Valor</th>
                  <th class="text-warning">Detalle</th>
+                 <th class="text-warning">Valor</th>
                  <th class="text-warning">Fecha</th>
                  <th></th>
                  <th></th>

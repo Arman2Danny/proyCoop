@@ -155,7 +155,8 @@ $pdf->Cell(211,4,'"CARDENAL DE LA TORRE"' ,0,1,'C');
 
 $pdf->SetFont('helvetica', '', 10);
 $pdf->Cell(210, 5, 'FUNDADA EL 18 DE JULIO 1987', 0, 1, 'C');
-$pdf->Cell(210,5, 'Este campo no se ve jajaj', 0, 1, 'C');
+$pdf->SetFont('helvetica', '', 8);
+$pdf->Cell(210,5, 'Con Acuerdo Ministerial No 2229 del 11 de Agosto de 1998', 0, 1, 'C');
 $pdf->ln(1);
 $pdf->Cell(210, 5, '__________________________________________', 0, 1, 'C');
 $pdf->ln(4);

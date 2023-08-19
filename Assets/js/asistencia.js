@@ -16,19 +16,11 @@ $('#nombre').change(function(){
 
 });
 
-/*document.getElementById("fecha").addEventListener('change', function(){
-    alert("funciona");
-    displayData();
-   });*/
+document.getElementById("fecha").addEventListener('change', function(){
 
-   document.addEventListener('DOMContentLoaded',function(){
-
-  
     displayDataAsistencia();
-   
-  console.log("si sirve");
-   
-  })
+    
+   });
 
    function formatDate(date) {
     var d = new Date(date),
@@ -46,24 +38,33 @@ $('#nombre').change(function(){
 
 function displayDataAsistencia(){
     var displayData = "true";
- 
+    var fecha = new Date();
+    var fechaAdd = $('#fecha').val();
+    
+  var result=formatDate(fecha);
+ if(fechaAdd == result){
   $.ajax({
       url: "Asistencia/displayAsistencia",
       type:"post",
       data:{
-          displaySend: displayData
+          displaySend: displayData,
+          resultSend: result 
       },
       success: function(data,status){
           $('#displayDataTableAsist').html(data);
+       
          
          
       }
   })
+}else{
+    $('#displayDataTableAsist').html('');
+}
 
 }
 
 function registrarAsistencia(e){
-    e.preventDefault();
+  e.preventDefault();
     const nombre = document.getElementById("nombre");
     const apellido = document.getElementById("apellido");
     const estado = document.getElementById("estado");
@@ -72,10 +73,12 @@ function registrarAsistencia(e){
     const fecha = document.getElementById("fecha");
     //const idsocio = document.getElementById("idsocio");
     const frm = document.getElementById("frmAsistencia");
+    var result= formatDate(fecha)
     //const estado = parseInt(est);
+ 
+
     
-    
-    if(evento.value == "" || nombre.value == "" || apellido.value== ""  || estado.value == "" || multa.value =="" || fecha.value == "" ){
+    if(evento.value == "" || nombre.value == "" || apellido.value== ""  || estado.value == "" ||  fecha.value == "" ){
         Swal.fire({
             position: 'center',
             icon: 'error',
@@ -104,7 +107,7 @@ function registrarAsistencia(e){
                   })
                   frm.reset();
                  // $("#nuevo_ticket").modal("hide");
-                 displayData();
+                 displayDataAsistencia();
                  // tblTicket.ajax.reload();
                
                }else if(res == "modificado"){
@@ -117,7 +120,7 @@ function registrarAsistencia(e){
                   })
                   frm.reset();
                  // $("#nuevo_ticket").modal("hide");
-                  displayData();
+                  displayDataAsistencia();
                   //tblTicket.ajax.reload();
                 
                  
@@ -134,5 +137,9 @@ function registrarAsistencia(e){
 
     }
 }
+}
+
+function editarAsistencia(id){
+    console.log(id);
 }
 

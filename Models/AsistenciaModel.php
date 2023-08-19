@@ -26,25 +26,26 @@
     public function getAsistenciaLista($fechaHoy){
         $this->fechaHoy = $fechaHoy;
         $sql = "SELECT * from socios, evento , asistenciasocio WHERE idsocio = idasistencia AND idevento = id_evento AND fecha_asist = '$this->fechaHoy'";
-        $data = $this->select($sql);
+        $data = $this->selectAll($sql);
         return $data;
     }
 
-    public function registrarAsistencia($fecha , $idnombre, $apellido,  $estado, $multa,$evento){
-        $this->fecha = $fecha;
-        $this->idnombre = $nombre;
+    public function registrarAsistencia($idnombre, $apellido, $estado,$fecha ,  $multa,$evento){
+       
+        $this->idnombre = $idnombre;
         $this->apellido = $apellido;
         $this->estado = $estado;
+        $this->fecha = $fecha;
         $this->multa = $multa;
         $this->evento = $evento;
        
         //$this->idsocio = $idsocio;
        
-        $verificar =  "SELECT * FROM asistenciasocio WHERE idasistiencia= '$this->idnombre' AND fecha_asist = '$this->fecha' ";
+        $verificar =  "SELECT * FROM asistenciasocio WHERE idasistencia= '$this->idnombre' AND fecha_asist = '$this->fecha' ";
         $existe = $this->select($verificar);
         if(empty($existe)){
-          $sql ="INSERT INTO ticket(idasistencia, apellidosocio, estado, fecha_asist,monto_multa, evento) VALUES(?,?,?,?,?,?)";
-          $datos = array($this->nombre, $this->apellido, $this->estado,$this->fecha,$this->multa,$this->multa);
+          $sql ="INSERT INTO asistenciasocio(idasistencia, apellidosocio, estado, fecha_asist,monto_multa, id_evento) VALUES(?,?,?,?,?,?)";
+          $datos = array($this->idnombre, $this->apellido, $this->estado,$this->fecha,$this->multa,$this->evento);
           $data=$this->save($sql, $datos);
           if($data == 1){
             $res= "ok";
@@ -55,6 +56,28 @@
           $res = "existe";
         }
           return $res;
+      }
+
+
+      public function modificarAsistencia($idnombre, $apellido , $estado,  $fecha ,  $multa, $evento){
+        $this->idnombre = $idnombre;
+        $this->apellido = $apellido;
+        $this->estado = $estado;
+        $this->fecha = $fecha;
+        $this->multa = $multa;
+        $this->evento = $evento;
+       
+       
+          $sql ="UPDATE asistenciasocio SET idasistencia = ?, apellidosocio = ?, estado = ?, fecha_asist= ?, monto_multa= ?, id_evento = ? WHERE idasistencia = ? ";
+          $datos = array($this->idnombre, $this->apellido, $this->estado, $this->fecha, $this->multa, $this->evento, $this->idnombre);
+          $data=$this->save($sql, $datos);
+          if($data == 1){
+            $res= "modificado";
+          }else{
+            $res= "error";
+          }
+          return $res;
+      
       }
  }
 ?>

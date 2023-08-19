@@ -6,16 +6,14 @@ require_once "Views/Templates/header.php"
 </ol>
 
 
-<button class="btn btn-info mb-3" type="button" onclick="registrarAsistencia(event);"><i class="fas fa-save"></i> Grabar </button>
-
 
 
 <!--inicio de formulario de asistencia-->
-<div class="card border-light mb-3" style="width: 100%">
+<div class="card border-light mb-1" style="width: 100%">
   <div class="card-header bg-transparent border-light">Datos Socio</div>
   <div class="card-body text-success">
 
-<form  class="border p-2 rounded-3 bg-light" id="frmAsistencia" method="POST">
+<form  method="POST"  class="border p-2 rounded-3 bg-light" id="frmAsistencia">
  
   <div class="row mb-4">
         <div class="row">
@@ -82,6 +80,13 @@ require_once "Views/Templates/header.php"
                             <label class="form-label text-dark" for="evento"><i class="far fa-calendar-alt"></i> Evento</label>
                         </div>
                     </div>
+
+                    <div class="col-4">
+                      
+
+                    <button class="btn btn-info form-control" type="button" onclick="registrarAsistencia(event);" id="btnAccion"><i class="fa fa-registered" aria-hidden="true"></i>egistrar</button>
+                           
+                    </div>
               </div>
               </div>
        </div>
@@ -90,13 +95,28 @@ require_once "Views/Templates/header.php"
  
 <!--fin de formulario-->
 
+
  
    
   </div>
-  <div class="card-footer bg-transparent mb-4">
-  <div id="displayDataTableAsist" class="mb-2"></div>
+  <div class="card-footer bg-transparent ">
+  <div id="displayDataTableAsist" class="mb-5"></div>
   </div>
 
 </div>
+
+<div class="modal fade" id="editarModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" >
+
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title text-white" id="exampleModalToggleLabel2">Editar Asistencias</h5>
+        <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      </div>
+      </div>
+      </div>  
+</div>
+
 
 <?php require_once "Views/Templates/footer.php"?>
