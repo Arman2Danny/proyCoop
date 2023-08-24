@@ -1,4 +1,10 @@
 
+
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('badge').style.display = "none";
+})
+
 document.getElementById("fecha").addEventListener('change', function(){
 
   displayAsistencia();
@@ -53,6 +59,20 @@ $.ajax({
 }
 
 function frmAsistencia(){
+  var fecha = document.getElementById("fecha").value;
+  if(fecha == ""){
+    document.getElementById("badge").style.display = "inline";
+    setTimeout(function(){
+      document.getElementById("badge").style.display = "none";
+  }, 2000);
+   
+  
+
+  }else{
+    document.getElementById("title").innerHTML="Registrar Asistencia";
+    $("#nuevo_asistencia").modal("show");
+  }
+
 
 
 }

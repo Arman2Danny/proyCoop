@@ -52,8 +52,67 @@
            }
 
         }
+
+
+        
+
     }
     
+    public function displayAsistencia(){
+
+     
+           
+  
+        if(isset($_POST['displaySend']) AND isset($_POST['resultSend'])){
+          $fechaHoy = $_POST['resultSend'];
+      
+       $table = '
+          <div class="container">
+          <div class="row">
+          <div class="col-lg-12">
+                  <table class="table mt-5 display nowrap" cellspacing="0" id="mitabla" width="100%" >
+                      <thead class="table-secondary table-striped">
+                          <tr>
+                          <th>Fecha</th>
+                          <th>Nombre_Socios</th>
+                          <th>Apellido_Socios</th>
+                           <th>Estado</th>
+                           <th>Multa</th>
+                           
+                           <th></th>
+                        
+                          </tr>
+                      </thead>
+          ';
+          $dateStr = null;
+          $data = $this->model->getAsistenciaLista($fechaHoy);
+          foreach($data as $row){
+              $id= $row['idasistencia'];
+              $nombre = $row['nombresocio'];
+              $apellido= $row['apellidosocio'];
+              $estado = $row['estado'];
+              $dateStr =date("Y-m-d", strtotime($row['fecha_asist'])) ;
+              $multa = $row['monto_multa'];
+              $evento = $row['id_evento'];
+            
+            
+              $table.= '<tr>
+              <td >'.$dateStr.'</td>
+              <td>'. $nombre .'</td>
+              <td>'. $apellido .'</td>
+              <td>'. $estado .'</td>
+              <td>'. $multa .'</td>
+              <td><button class= "btn btn-info" onclick="btneditarAsistencia('.$id.',\''.$dateStr.'\') "  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
+        
+           ';
+          }
+          echo '<script type="text/JavaScript"> 
+          $("#mitabla").DataTable();
+          </script>';
+         echo $table;
+        
+      }
+  }
 
    
 
