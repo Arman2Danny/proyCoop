@@ -1,6 +1,8 @@
 <?php
  class AsistenciaModel extends Query{
     private  $id_nombre;
+    private $id;
+    private $fecha;
     public function __construct(){
         parent::__construct();
 
@@ -59,17 +61,18 @@
       }
 
 
-      public function modificarAsistencia($idnombre, $apellido , $estado,  $fecha ,  $multa, $evento){
+      public function modificarAsistencia($idnombre, $apellido , $estado,  $fecha ,  $multa, $evento, $id){
         $this->idnombre = $idnombre;
         $this->apellido = $apellido;
         $this->estado = $estado;
         $this->fecha = $fecha;
         $this->multa = $multa;
         $this->evento = $evento;
+        $this->id = $id;
        
        
           $sql ="UPDATE asistenciasocio SET idasistencia = ?, apellidosocio = ?, estado = ?, fecha_asist= ?, monto_multa= ?, id_evento = ? WHERE idasistencia = ? ";
-          $datos = array($this->idnombre, $this->apellido, $this->estado, $this->fecha, $this->multa, $this->evento, $this->idnombre);
+          $datos = array($this->idnombre, $this->apellido, $this->estado, $this->fecha, $this->multa, $this->evento, $this->id);
           $data=$this->save($sql, $datos);
           if($data == 1){
             $res= "modificado";
@@ -80,9 +83,12 @@
       
       }
 
-      public function AsistenciaEditar($id){
-        $sql = "SELECT * FROM asistenciasocio WHERE idasistencia = $id";
-        $data = $this->select($sql);
+      public function AsistenciaEditar($id, $fecha){
+        $this->id = $id;
+        $this->fecha = $fecha;
+        
+        $sql = "SELECT * FROM asistenciasocio WHERE idasistencia = '$this->id' AND fecha_asist = '$this->fecha' ";
+        $data = $this->selectAll($sql);
         return $data;
       
        }
