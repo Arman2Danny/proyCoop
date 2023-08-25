@@ -5,7 +5,7 @@
 <li class="breadcrumb-item active"><h2>Asistencia de Socios</h2></li>
 </ol>
 <div>
-<input type="date" name="fecha" id="fecha" form="frmAsistencia" required> 
+<input type="date" name="fecha" id="fecha"  required> 
 
 <button class="btn btn-primary mx-2 " type="button" onclick="frmAsistencia();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar</button>
 <span class="badge bg-warning mx-3" id="badge">llene el campo fecha</span>
@@ -26,6 +26,7 @@
               <div class="modal-body">
               <form method="POST"  id="frmAsistencia">
                 <input type="hidden" name="codigoasistencia" id="codigoasistencia" >
+                <input type="hidden" name="fechafrm" id="fechafrm">
                 <div class="form-group">
                 <i class="fas fa-users"></i>
                     <label for="nombre">Nombre Socio</label>
@@ -40,52 +41,45 @@
                 </div>
 
                 <div class="form-group">
-                <i class="fa fa-id-card" aria-hidden="true"></i>
-                    <label for="placa">Numero_Placa</label>
-                    <input id="placa" class="form-control border border-info" type="text" name="placa">
+                <i class="fab fa-wizards-of-the-coast"></i>
+                    <label for="apellido">Apellido_Socio</label>
+                    <input id="apellido" class="form-control border border-info" type="text" name="apellido">
                 </div>
 
                 <div class="form-group">
-                <i class="fa fa-id-card" aria-hidden="true"></i>
-                    <label for="chasis">Numero_Chasis</label>
-                    <input id="chasis" class="form-control border border-info" type="text" name="chasis">
+                <i class="fas fa-tint"></i>
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-select " name="estado">
+                   <option selected disabled>Seleccionar:</option>
+                   <option value="Presente">Presente</option>
+                   <option value="Falta">Falta</option>
+                    <option value="Justificado">Justificado</option>
+                  </select>
+
                 </div>
                 
                 <div class="form-group">
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    <label for="marca">Modelo</label>
-                    <input id="marca" class="form-control border border-info" type="text" name="marca">
+                <i class="fas fa-money-check-alt"></i> 
+                    <label for="multa">Multa</label>
+                    <input type="text" id="multa" name="multa" class="form-control border " />
                 </div>
 
 
                 <div class="form-group">  
-                <i class="fa fa-calendar"></i>
-                    <label for="fecha">Fecha_Fabricacion</label>
-                    <input id="fecha" class="form-control border border-info" type="date" name="fecha">
-                </div>
+                <i class="far fa-calendar-alt"></i> 
+                    <label for="evento">Evento</label>
+                    <select  id="evento"  name="evento" class="form-select" />
+                          <option selected disabled>Seleccionar:</option>
+                          <?php foreach($data['evento'] as $row){  ?>
+                        <option value="<?php echo $row['idevento'] ?>"><?php echo $row['nombre_evento'];  ?></option>
 
-                
-                
-                <div class="form-group">
-                <i class="fas fa-id-card"></i>
-                <label for="habilitacion">Numero_Habilitacion</label>
-                    <input id="habilitacion" class="form-control border border-info" type="text" name="habilitacion">
-                    </div>
+                     <?php } ?>
+                        </select>
 
-                    <div class="form-group">
-                    <i class="fa fa-rocket" aria-hidden="true"></i>
-                    <label for="idsocio">Socio</label>
-                    <select id="idsocio" class="form-control border border-info" name="idsocio">
-                        <option selected disabled>Seleccionar:</option>
-                        <?php foreach($data['vehiculo'] as $row){  ?>
-                        <option value="<?php echo $row['idsocio'] ?>"><?php echo $row['nombresocio'];  ?></option>
-
-                     <?php } ?>   
-                    </select>
-                </div>    
+                </div>   
               
               
-               <button class="btn btn-info mt-4" type="button" onclick="registrarVehiculo(event);" id="btnAccion"><i class="fa fa-registered" aria-hidden="true"></i>egistrar</button>
+               <button class="btn btn-info mt-4" type="button" onclick="registrarAsistencia(event);" id="btnAccion"><i class="fa fa-registered" aria-hidden="true"></i>egistrar</button>
                <button class="btn btn-danger mt-4" type="button" data-bs-dismiss="modal">Cancelar</button>
 
             

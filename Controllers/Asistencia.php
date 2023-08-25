@@ -102,7 +102,7 @@
               <td>'. $apellido .'</td>
               <td>'. $estado .'</td>
               <td>'. $multa .'</td>
-              <td><button class= "btn btn-info" onclick="btneditarAsistencia('.$id.',\''.$dateStr.'\') "  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
+              <td><button class= "btn btn-info" onclick="btnEditarAsistencia('.$id.',\''.$dateStr.'\') "  data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-dismiss="modal" ><i class="fa fa-edit"></i></button> </td>
         
            ';
           }
@@ -114,7 +114,40 @@
       }
   }
 
-   
+  public function registrarAsist(){
+
+    $id = $_POST['codigoasistencia'];
+    $nombre = $_POST["nombre"];
+    $apellido = $_POST["apellido"];
+    $estado = $_POST["estado"];
+    $fecha = $_POST["fechafrm"];
+    $multa = $_POST["multa"];
+    $evento = $_POST["evento"];
+
+    if($id ==""){
+        $data= $this->model->registrarAsistencia($nombre,$apellido, $estado, $fecha, $multa,$evento);
+        if($data == "ok"){
+            $msg= "si";
+
+               }else if($data == "existe"){
+                   $msg= "la asistencia del socio ya existe";
+               }else{
+               $msg = "error al registrar la asistencia";
+            }
+    }
+    
+    echo $msg;
+    die();
+
+
+  }
+
+   public function editarAsist($id, $fecha){
+    echo $id;
+    echo $fecha;
+
+
+   }
 
  }
 
