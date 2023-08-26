@@ -180,14 +180,18 @@ function registrarAsistencia(e){
 
 }
 
-function btnEditarAsistencia(id, fecha){
+function btnEditarAsistencia(editarid, fechainicio){
   document.getElementById("title").innerHTML="Actualizar Asistencia";
   document.getElementById("btnAccion").innerHTML='<i class="fa fa-refresh" aria-hidden="true"></i> Actualizar';
   document.getElementById("btnAccion").classList.replace("btn-primary","btn-success");
-  console.log(id);
-  console.log(fecha);
-  const url = base_url + "Asistencia/editarAsist/"+id+"&"+fecha; 
-  console.log(url);
-
+  console.log(editarid);
+  console.log(fechainicio);
+  $('#codigoasistencia').val(editarid);
+ //const url = base_url + "Asistencia/editarAsist/"+id; 
+ //console.log(url);
+$.post("Asistencia/editarAsist/", {id:editarid, fecha: fechainicio }, function(data, status){
+ // var res = JSON.parse(data);
+  console.log(data);
+})
 }
 

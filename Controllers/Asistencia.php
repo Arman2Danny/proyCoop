@@ -142,9 +142,14 @@
 
   }
 
-   public function editarAsist($id, $fecha){
+   public function editarAsist(){
+    $id= $_POST['id'];
+    $fecha = $_POST['fecha'];
     echo $id;
     echo $fecha;
+    $data=$this->model->AsistenciaEditar($id, $fecha);
+    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+    die();
 
 
    }
