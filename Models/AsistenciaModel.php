@@ -72,7 +72,7 @@
        
        
           $sql ="UPDATE asistenciasocio SET idasistencia = ?, apellidosocio = ?, estado = ?, fecha_asist= ?, monto_multa= ?, id_evento = ? WHERE idasistencia = ? ";
-          $datos = array($this->idnombre, $this->apellido, $this->estado, $this->fecha, $this->multa, $this->evento, $this->id);
+          $datos = array($this->idnombre, $this->apellido, $this->estado, $this->fecha, $this->multa, $this->evento, $this->idnombre);
           $data=$this->save($sql, $datos);
           if($data == 1){
             $res= "modificado";
@@ -88,7 +88,7 @@
         $this->fecha = $fecha;
         
         $sql = "SELECT * FROM asistenciasocio WHERE idasistencia = '$this->id' AND fecha_asist = '$this->fecha' ";
-        $data = $this->selectAll($sql);
+        $data = $this->select($sql);
         return $data;
       
        }

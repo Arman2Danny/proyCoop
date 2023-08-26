@@ -124,7 +124,7 @@ function registrarAsistencia(e){
     timer: 2500
   });
  }else{
-  const url = base_url + "Asistencia/registrarAsist";
+  const url = base_url + "Asistencia/registrarAsist/";
   const frm= document.getElementById("frmAsistencia");
   const http= new  XMLHttpRequest();
   http.open("POST", url, true );
@@ -157,9 +157,10 @@ function registrarAsistencia(e){
         timer: 3500
       })
       frm.reset();
-      $("#nuevo_vehiculo").modal("hide");
+      $("#nuevo_asistencia").modal("hide");
     
-      tblVehiculo.ajax.reload();
+      displayAsistencia();
+      $('#displayDataTableAsist').ajax.reload();
     
      
    }else{
@@ -184,14 +185,26 @@ function btnEditarAsistencia(editarid, fechainicio){
   document.getElementById("title").innerHTML="Actualizar Asistencia";
   document.getElementById("btnAccion").innerHTML='<i class="fa fa-refresh" aria-hidden="true"></i> Actualizar';
   document.getElementById("btnAccion").classList.replace("btn-primary","btn-success");
-  console.log(editarid);
-  console.log(fechainicio);
+ // console.log(editarid);
+ // console.log(fechainicio);
   $('#codigoasistencia').val(editarid);
  //const url = base_url + "Asistencia/editarAsist/"+id; 
  //console.log(url);
 $.post("Asistencia/editarAsist/", {id:editarid, fecha: fechainicio }, function(data, status){
- // var res = JSON.parse(data);
-  console.log(data);
+resp = JSON.parse(data);
+document.getElementById("codigoasistencia").value= resp.codigoAsistencia;
+document.getElementById("nombre").value=resp.idasistencia;
+document.getElementById("apellido").value=resp.apellidosocio;
+document.getElementById("estado").value=resp.estado;
+document.getElementById("fechafrm").value=resp.fecha_asist;
+document.getElementById("multa").value=resp.monto_multa;
+document.getElementById("evento").value=resp.id_evento;
+
+//document.getElementById("nombre").disabled = true;
+//document.getElementById("apellido").disabled = true;
+$("#nuevo_asistencia").modal("show");
+
+
 })
 }
 

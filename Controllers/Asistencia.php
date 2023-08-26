@@ -134,6 +134,14 @@
                }else{
                $msg = "error al registrar la asistencia";
             }
+    }else{
+        $data= $this->model->modificarAsistencia($nombre,$apellido, $estado,$fecha, $multa, $evento, $id);
+        if($data == "modificado"){
+          $msg= "modificado";
+             }else{
+             $msg = "error al modificar el socio";
+          }
+
     }
     
     echo $msg;
@@ -145,10 +153,11 @@
    public function editarAsist(){
     $id= $_POST['id'];
     $fecha = $_POST['fecha'];
-    echo $id;
-    echo $fecha;
+   // echo $id;
+   // echo $fecha;
     $data=$this->model->AsistenciaEditar($id, $fecha);
-    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+    //print_r($data);
+    echo json_encode($data);
     die();
 
 
