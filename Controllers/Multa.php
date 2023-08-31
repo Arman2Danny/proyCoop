@@ -12,7 +12,9 @@ class Multa extends Controller{
           $this->views->getView($this, "index");
 
     }
-    
+    public function displayMulta(){
+        echo "esta listo";
+    }
 
 
 }
