@@ -30,11 +30,11 @@ require_once "Config/Config.php";
     if(method_exists($controller, $metodo)){
         $controller->$metodo($parametro);
     }else{
-        echo "no existe el metodo";
+       header('Location:'.base_url.'Errors');
     }
 
   }else{
-    echo "no existe el controlador";
+    header('Location:'.base_url.'Errors');
   }
 
 ?>
