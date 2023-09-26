@@ -66,7 +66,7 @@
                              $msg= "si";
      
                               }else if($data == "existe"){
-                                  $msg= "el socio ya existe";
+                                  $msg= "el email del socio ya existe";
                                      }else{
                                          $msg = "error al registrar el socio";
                                           }

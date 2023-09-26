@@ -46,7 +46,9 @@ class Socios extends Controller{
         for($i=0; $i<count($data) ; $i++){
             if($data[$i]['estado'] == 1){
                 $data[$i]['estado'] ='<span class="badge bg-primary">Activo</span>';
-                $data[$i]['acciones']='<div class="d-inline "><button class="btn btn-warning mb-1" type="button" onclick="btnEditarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-pencil-square" aria-hidden="true">Editar</i></button></div>
+                $data[$i]['acciones']='<div class="d-inline ">
+                <a class="btn btn-dark mb-1" href="'.base_url.'Socios/permisos/'.$data[$i]['idsocio'].'" ><i class="fa fa-key" aria-hidden="true">Editar</i></a>
+                <button class="btn btn-warning mb-1" type="button" onclick="btnEditarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-pencil-square" aria-hidden="true">Editar</i></button></div>
             
 
            <div class="d-inline "> <button class="btn btn-danger" type="button" onclick="btnEliminarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-trash" aria-hidden="true">Eliminar</i></button>
@@ -133,6 +135,17 @@ class Socios extends Controller{
       die();
 
       }
+
+      public function permisos($id){ 
+        
+        if(empty($_SESSION['activo'])){
+            header("location: ".base_url);
+        }
+
+       $data = $this->model->getPermisos();
+       $this->views->getView($this, "permisos", $data);
+       
+    }
 
       public function salir(){
         session_unset();

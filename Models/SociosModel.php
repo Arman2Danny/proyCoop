@@ -107,6 +107,13 @@
 
 
  }
+
+ public function getPermisos(){
+  $sql="SELECT * FROM permisos ";
+  $data= $this->selectAll($sql);
+  return $data;
+}
+
  //total socios
  public function totalSocios(){
   $sql="SELECT * FROM socios, roles WHERE tipopermiso= id_permiso ";

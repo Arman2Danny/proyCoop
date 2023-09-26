@@ -27,6 +27,7 @@ if(isset($_SESSION['rol'])){
         <link href="<?php echo base_url; ?>Assets/style.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/datatables.min.css" rel="stylesheet" />
         <link href="<?php echo base_url;?>Assets/css/styles.css" rel="stylesheet" />
+        <link href="<?php echo base_url;?>Assets/css/estilo.css" rel="stylesheet" />
         <link href="<?php echo base_url;?>Assets/css/sweetalert2.min.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.js" crossorigin="anonymous"></script>
     </head>
