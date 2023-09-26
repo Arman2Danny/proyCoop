@@ -20,12 +20,12 @@
         return $data;
     }
     public function getPermiso(){
-      $sql="SELECT * FROM permiso ";
+      $sql="SELECT * FROM roles ";
       $data= $this->selectAll($sql);
       return $data;
   }
     public function getSocios(){
-      $sql="SELECT s.*, p.tiposocio FROM socios s INNER JOIN permiso p where s.id_permiso = p.tipopermiso ";
+      $sql="SELECT s.*, p.tiposocio FROM socios s INNER JOIN roles p where s.id_permiso = p.tipopermiso ";
       $data= $this->selectAll($sql);
       return $data;
   }
@@ -109,7 +109,7 @@
  }
  //total socios
  public function totalSocios(){
-  $sql="SELECT * FROM socios, permiso WHERE tipopermiso= id_permiso ";
+  $sql="SELECT * FROM socios, roles WHERE tipopermiso= id_permiso ";
   $data= $this->selectTotal($sql);
   return $data;
 }

@@ -32,6 +32,7 @@
                     $_SESSION['nombre'] = $data['nombresocio'];
                     $_SESSION['apellido']= $data['apellidosocio'];
                     $_SESSION['rol'] = $data['id_permiso'];
+                    $_SESSION['email'] = $data['correo'];
                     $_SESSION['activo'] = true;
                     $msg = "ok";
                 }else{
@@ -59,7 +60,7 @@
                  $msg= "Todos los campos son obligatorios";
      
                       }else{
-                      if(isset($_POST['nombre']) || isset($_POST['password'])){
+                      if(isset($_POST['nombre']) || isset($_POST['password']) || isset($_POST['email'])){
                          $data= $this->model->registrarSocios($nombre,$apellido,$direccion, $telefono, $hash, $cedula, $email,"","");
                          if($data == "ok"){
                              $msg= "si";

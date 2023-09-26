@@ -32,8 +32,9 @@ class RegistrarModel extends Query{
         $this->id_permiso = $id_permiso;
         $this->estado = 1;
         $this->id_permiso=6;
-        $verificar =  "SELECT * FROM socios WHERE nombresocio = '$this->nombre' AND correo='$this->email' ";
-        $existe = $this->select($verificar);
+        $verificar =  "SELECT * FROM socios WHERE  correo ='$this->email' ";
+        $existe = $this->selectEmail($verificar);
+
         if(empty($existe)){
           $sql ="INSERT INTO socios(nombresocio, apellidosocio,direccion,telefono, passw, cedula,correo, estado, id_permiso) VALUES(?,?,?,?,?,?,?,?,?)";
           $datos = array($this->nombre, $this->apellido,$this->direccion, $this->telefono, $this->passw, $this->cedula, $this->email,$this->estado, $this->id_permiso);
@@ -43,10 +44,19 @@ class RegistrarModel extends Query{
           }else{
             $res= "error";
           }
+      }else{
+        $res = "existe";
+      }
+     return $res;
+
+  
+       /*if(empty($existe)){
+
+     
         }else{
-          $res = "existe";
+        
         }
-          return $res;
+          return $res;*/
       }
 
 

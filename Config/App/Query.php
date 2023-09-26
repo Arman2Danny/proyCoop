@@ -15,6 +15,16 @@
 
     }
 
+    public function selectEmail(string $sql){
+      $this->sql = $sql;
+      $result = $this->con->prepare($this->sql);
+      $result->execute();
+     if( $data = $result->fetch()>0){
+      return $data;
+     }      
+
+  }
+
     public function selectAll(string $sql){
         $this->sql = $sql;
         $result = $this->con->prepare($this->sql);

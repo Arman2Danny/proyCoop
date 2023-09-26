@@ -12,7 +12,7 @@ public function getSocio(string $email, string $clave){
        return $data;
    }
     public function getPermiso(){
-        $sql="SELECT * FROM permiso ";
+        $sql="SELECT * FROM roles ";
         $data= $this->selectAll($sql);
         return $data;
     }

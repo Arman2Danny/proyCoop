@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded',function(){
 })
 
 function frmRoles(){
-document.getElementById("title").innerHTML="Registrar Permiso";
+document.getElementById("title").innerHTML="Registrar Roles";
     document.getElementById("btnAccion").innerHTML='<i class="fa fa-registered" aria-hidden="true"></i>egistrar';
     document.getElementById("btnAccion").classList.replace("btn-success","btn-primary");
     document.getElementById("frmRoles").reset()
@@ -107,7 +107,7 @@ function registrarRoles(e){
 //editar roles
 function btnEditarRoles(id){
  
-    document.getElementById("title").innerHTML="Actualizar Permisos";
+    document.getElementById("title").innerHTML="Actualizar Roles";
     document.getElementById("btnAccion").innerHTML='<i class="fa fa-refresh" aria-hidden="true"></i> Actualizar';
     document.getElementById("btnAccion").classList.replace("btn-primary","btn-success");
    // document.getElementById('oculto').classList.replace("d-none","d-block");
