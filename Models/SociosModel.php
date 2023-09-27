@@ -121,6 +121,41 @@
   return $data;
 }
 
+public function registrarPermisos($id_socio, $id_permiso){
+  $sql = "INSERT INTO detalle_permisos (id_socio,id_permiso) values (?,?)";
+  $datos = array($id_socio, $id_permiso);
+  $data = $this->save($sql, $datos);
+  if($data == 1){
+    $resp = 'ok';
+   }else{
+     $resp = 'error';
+   }
+ 
+   return $resp;
+
+
+}
+
+public function eliminarPermisos($id_socio){
+  $sql = "DELETE FROM detalle_permisos WHERE id_socio = ?";
+  $datos = array($id_socio);
+  $data = $this->save($sql, $datos);
+  if($data == 1){
+   $resp = "ok";
+  }else{
+    $resp = "error";
+  }
+
+  return $resp;
+
+}
+
+public function getDetallePermisos($id){
+  $sql="SELECT * FROM detalle_permisos WHERE id_socio = $id";
+  $data= $this->selectAll($sql);
+  return $data;
+}
+
   }
 
 ?>

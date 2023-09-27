@@ -9,10 +9,20 @@
         if(empty($_SESSION['activo'])){
             header("location: ".base_url);
         }
-      
-          $data['socio']=$this->model->getSocio();
+            $id_socio = $_SESSION['id_socio'];
+            echo $id_socio;
+           $verificar =  $this->model->verificarPermisos($id_socio, 'asistencia' );
+          if(!empty($verificar)){
+            $data['socio']=$this->model->getSocio();
+          
+            $this->views->getView($this, "index",$data);
+
+          }else{
+            header('location: '.base_url.'Errors/permisos');
+
+          }
           $data["evento"]=$this->model->getEvento();
-          $this->views->getView($this, "index",$data);
+         
 
     }
 

@@ -46,6 +46,11 @@ class Socios extends Controller{
         for($i=0; $i<count($data) ; $i++){
             if($data[$i]['estado'] == 1){
                 $data[$i]['estado'] ='<span class="badge bg-primary">Activo</span>';
+            if($data[$i]['idsocio'] == 1){
+                $data[$i]['acciones']='<div><span class="badge bg-primary">Administrador</span></div>';
+
+            }else{
+                
                 $data[$i]['acciones']='<div class="d-inline ">
                 <a class="btn btn-dark mb-1" href="'.base_url.'Socios/permisos/'.$data[$i]['idsocio'].'" ><i class="fa fa-key" aria-hidden="true">Editar</i></a>
                 <button class="btn btn-warning mb-1" type="button" onclick="btnEditarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-pencil-square" aria-hidden="true">Editar</i></button></div>
@@ -53,6 +58,8 @@ class Socios extends Controller{
 
            <div class="d-inline "> <button class="btn btn-danger" type="button" onclick="btnEliminarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-trash" aria-hidden="true">Eliminar</i></button>
             </div> ';
+
+            }
             }else{
                 $data[$i]['estado'] ='<span class="badge bg-danger">Inactivo</span>';
                 $data[$i]['acciones']='<div class="d-inline "><button class="btn btn-warning mb-1" type="button" onclick="btnEditarSocio('.$data[$i]['idsocio'].');"><i class="fa fa-pencil-square" aria-hidden="true">Editar</i></button></div>
@@ -142,9 +149,40 @@ class Socios extends Controller{
             header("location: ".base_url);
         }
 
-       $data = $this->model->getPermisos();
+       $data['datos'] = $this->model->getPermisos();
+       $permisos = $this->model->getDetallePermisos($id);
+       $data['asignados']= array();
+       foreach($permisos as $permiso){
+        $data['asignados'][$permiso['id_permiso']] = true;
+       }
+       $data['id_socio'] = $id;
        $this->views->getView($this, "permisos", $data);
        
+    }
+
+    public function registrarPermiso(){
+        $msg = '';
+        $id_socio = $_POST['id_socio'];
+       $eliminar= $this->model->eliminarPermisos($id_socio);
+
+       if($eliminar == "ok"){
+        foreach($_POST['permisos'] as $id_permiso){
+           $msg= $this->model->registrarPermisos($id_socio, $id_permiso);
+            if($msg == 'ok'){
+                $msg = array('msg' => 'Permisos Asignados', 'icono' => 'success');
+            }else{
+                $msg = array('msg' => 'Error al asignar los permisos', 'icono' => 'error');
+            }
+
+        }
+
+
+       }else{
+        $msg = array('msg'=> 'Error al eliminar los permisos anteriores', 'icono' => 'error');
+
+       }
+       echo json_encode ($msg);
+      
     }
 
       public function salir(){

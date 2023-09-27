@@ -219,3 +219,37 @@ function btnEliminarSocio(id){
 
 }
 
+function alertas(mensaje, icono){
+    Swal.fire({
+        position: 'top-end',
+        icon: icono,
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 3000
+    })
+}
+
+function registrarPermisos(e){
+    e.preventDefault();
+    const url = base_url+ "Socios/registrarPermiso";
+    const frm = document.getElementById('formulario');
+    const http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.send(new FormData(frm));
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+           // console.log(this.responseText);
+           const resp = JSON.parse(this.responseText);
+          // console.log(resp);
+        if(resp != ''){
+            alertas(resp.msg, resp.icono);
+
+           }else{
+            alertas('Error no identicado', 'error');
+           }
+
+        }
+    }
+
+}
+
