@@ -67,6 +67,7 @@ margin: auto;
     box-shadow: 6px 6px 12px #4d4c4c, -6px -6px 12px #ffffff;
 
 }
+
 .content:hover{
     transform: translate(-5px , -10px);
     box-shadow: 10px 10px 20px -5px rgba(0, 0, 0, 0.40);

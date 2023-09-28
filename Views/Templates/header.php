@@ -27,9 +27,10 @@ if(isset($_SESSION['rol'])){
         <link href="<?php echo base_url; ?>Assets/style.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/datatables.min.css" rel="stylesheet" />
         <link href="<?php echo base_url;?>Assets/css/styles.css" rel="stylesheet" />
-        <link href="<?php echo base_url;?>Assets/css/estilo.css" rel="stylesheet" />
+        <link href="<?php echo base_url;?>Assets/css/estilo .css" rel="stylesheet" />
         <link href="<?php echo base_url;?>Assets/css/sweetalert2.min.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.js" crossorigin="anonymous"></script>
+      
     </head>
     <body class="sb-nav-fixed">
         
@@ -56,31 +57,31 @@ if(isset($_SESSION['rol'])){
             </ul>
         </nav>
        
-         -->                   
+         <!-- fin navbar -->                   
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-light border-primary" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav mt-3">
+                    <div class="sb-sidenav-menu bg-primary " style="--bs-bg-opacity: .7">
+                        <div class="nav mt-3  p-2">
                        <!--inicio de menu dashboard-->
                        
-                                    <a class="nav-link" href="<?php echo base_url; ?>Escritorio"><i class="fa-solid fa-gauge-high mx-2"></i>Escritorio</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Escritorio"><i class="fa-solid fa-gauge-high mx-2"></i> <h5>Escritorio</h5> </a>
                        
                        <!--fin dashboard-->
 
                            
-                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">  
-                     <i class="fa-solid fa-square-h mx-2"></i> Menu Principal
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                     <a href="#" style="text-decoration: none">  
+                     <i class="fa-solid fa-square-h mx-2"></i> <span class="badge bg-warning">Menu Principal</span> 
+                              
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div >
                          <!--menu dinamico  inicio     -->
                         <?php  
                         for($i=0;$i<sizeof($mx);$i++){
                         ?>
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url;
+                                <nav class="sb-sidenav-menu-nested hover-overlay" id="nav" style="background: orange;">
+                                    <a class="nav-link bg-light border-3 mt-1 rounded-3 "  id="menumx" href="<?php echo base_url;
                                      echo $mx[$i]['mruta']; ?>"><i class="<?php echo $mx[$i]['micon']; ?>" aria-hidden="true"></i><?php echo $mx[$i]['mnombre'] ?></a>
                                    
                                 </nav>
