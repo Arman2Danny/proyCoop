@@ -11,8 +11,21 @@ class Evento extends Controller{
             header("location: ".base_url);
 
         }
+        $id_socio = $_SESSION['id_socio'];
+        echo $id_socio;
+       $verificar =  $this->model->verificarPermisos($id_socio, 'evento' );
+      if(!empty($verificar) || $id_socio == 1){
+        $this->views->getView($this, "index");
+
+      }else{
+        header('location: '.base_url.'Errors/permisos');
+
+      }
+        
         //$data['evento']= $this->model->getEvento();
-         $this->views->getView($this, "index");
+
+
+      
 
 
     }

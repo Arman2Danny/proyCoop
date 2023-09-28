@@ -4,15 +4,29 @@ class Vehiculos extends Controller{
             session_start();
             parent::__construct();
         }
+
+
+
  
   public function index(){
     if(empty($_SESSION['activo'])){
       header("location: ".base_url);
   }
+  $id_socio = $_SESSION['id_socio'];
+  echo $id_socio;
+ $verificar =  $this->model->verificarPermisos($id_socio, 'socios' );
+if(!empty($verificar) || $id_socio == 1){
+  $data['vehiculo']=$this->model->getVehiculo();
 
-    $data['vehiculo']=$this->model->getVehiculo();
-    $this->views->getView($this, "index",$data);
+  $this->views->getView($this, "index",$data);
 
+}else{
+  header('location: '.base_url.'Errors/permisos');
+
+}
+  
+   // $data['vehiculo']=$this->model->getVehiculo();
+  
   } 
   public function listar(){
     $data= $this->model->getVehiculos();

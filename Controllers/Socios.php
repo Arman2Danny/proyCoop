@@ -13,8 +13,21 @@ class Socios extends Controller{
             header("location: ".base_url);
         }
 
-       $data['roles'] = $this->model->getPermiso();
-       $this->views->getView($this, "index", $data);
+        $id_socio = $_SESSION['id_socio'];
+        echo $id_socio;
+       $verificar =  $this->model->verificarPermisos($id_socio, 'socios' );
+      if(!empty($verificar) || $id_socio == 1){
+        $data['roles']=$this->model->getPermiso();
+      
+        $this->views->getView($this, "index",$data);
+
+      }else{
+        header('location: '.base_url.'Errors/permisos');
+
+      }
+
+       //$data['roles'] = $this->model->getPermiso();
+    
        
     }
     public function validar(){

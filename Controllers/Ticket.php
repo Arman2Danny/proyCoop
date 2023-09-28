@@ -8,9 +8,22 @@ class Ticket extends Controller{
         if(empty($_SESSION['activo'])){
             header("location: ".base_url);
         }
+
+        $id_socio = $_SESSION['id_socio'];
+        echo $id_socio;
+       $verificar =  $this->model->verificarPermisos($id_socio, 'socios' );
+      if(!empty($verificar) || $id_socio == 1){
         $data['listar'] = $this->model->getListarTicket();
         $data['ticket']=$this->model->getTicket();
-        $this->views->getView($this, "index", $data);
+      
+        $this->views->getView($this, "index",$data);
+
+      }else{
+        header('location: '.base_url.'Errors/permisos');
+
+      }
+       
+     
     }
 
 

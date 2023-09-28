@@ -12,7 +12,7 @@
             $id_socio = $_SESSION['id_socio'];
             echo $id_socio;
            $verificar =  $this->model->verificarPermisos($id_socio, 'asistencia' );
-          if(!empty($verificar)){
+          if(!empty($verificar) || $id_socio == 1){
             $data['socio']=$this->model->getSocio();
           
             $this->views->getView($this, "index",$data);
